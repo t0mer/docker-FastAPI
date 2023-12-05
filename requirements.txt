@@ -1,0 +1,9 @@
+loguru
+requests
+fastapi
+uvicorn
+jinja2
+aiofiles
+python-multipart
+starlette_exporter
+cryptography
