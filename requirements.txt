@@ -6,4 +6,4 @@ jinja2
 aiofiles
 python-multipart
 starlette_exporter
-cryptography==2.6.1
+cryptography==39.0.1
