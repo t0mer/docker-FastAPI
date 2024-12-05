@@ -7,3 +7,4 @@ aiofiles
 python-multipart
 starlette_exporter
 cryptography==43.0.1
+starlette>=0.40.0 # not directly required, pinned by Snyk to avoid a vulnerability
