@@ -1,24 +1,19 @@
-FROM ubuntu:20.04
+FROM python:3.12-slim
 
 LABEL maintainer="tomer.klein@gmail.com"
 
-ENV PYTHONIOENCODING=utf-8
-ENV LANG=C.UTF-8
+ENV PYTHONIOENCODING=utf-8 \
+    LANG=C.UTF-8 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
 
-RUN apt update -yqq
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      libffi-dev \
+      libssl-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN apt install -yqq python3-pip && \
-    apt install -yqq libffi-dev && \
-    apt install -yqq libssl-dev
+COPY requirements.txt /tmp/requirements.txt
 
-
-COPY requirements.txt /tmp
-
-RUN pip3 install --upgrade pip setuptools  --no-cache-dir 
-
-RUN pip3 install -r /tmp/requirements.txt
-
-
-
-  
-
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
